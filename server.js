@@ -9,10 +9,22 @@ const port = 3000;
 app.use(express.static('public'));
 
 // API endpoint to get metrics data
+// app.get('/api/metrics', async (req, res) => {
+//   try {
+//     const metricsData = await readMetricsFile('/var/log/system_metrics.log');
+//     res.json(metricsData);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
 app.get('/api/metrics', async (req, res) => {
   try {
-    const metricsData = await readMetricsFile('/var/log/system_metrics.log');
-    res.json(metricsData);
+    const response = await fetch('http://13.203.193.179/api/metrics'); // Fetch data from external API
+    if (!response.ok) {
+      throw new Error(`Failed to fetch metrics: ${response.statusText}`);
+    }
+    const metricsData = await response.json(); // Parse JSON response
+    res.json(metricsData); // Send it to client
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
