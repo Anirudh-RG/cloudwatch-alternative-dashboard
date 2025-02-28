@@ -1,0 +1,137 @@
+body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .dashboard-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 20px;
+    }
+    .metric-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 15px;
+      transition: all 0.3s ease;
+    }
+    .metric-card.expanded {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 100;
+      margin: 40px;
+      display: flex;
+      flex-direction: column;
+    }
+    .metric-card.expanded .chart-container {
+      flex-grow: 1;
+    }
+    .metric-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .metric-title {
+      margin: 0;
+      font-size: 18px;
+      color: #333;
+    }
+    .chart-container {
+      position: relative;
+      height: 180px;
+      width: 100%;
+    }
+    .expand-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .close-button {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 14px;
+      display: none;
+    }
+    .expanded .close-button {
+      display: block;
+    }
+    .expanded .expand-button {
+      display: none;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .refresh-button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .refresh-button:hover {
+      background-color: #0b7dda;
+    }
+    .info-card {
+      grid-column: span 2;
+      padding: 15px;
+      background-color: #e3f2fd;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .server-info {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .info-item {
+      text-align: center;
+      padding: 10px;
+    }
+    .info-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+    .info-label {
+      font-size: 14px;
+      color: #666;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 99;
+      display: none;
+    }
