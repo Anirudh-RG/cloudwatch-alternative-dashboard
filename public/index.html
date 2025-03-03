@@ -4,97 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>System Metrics Dashboard</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-  <style>
-    /* Your existing CSS without expand/collapse styles */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f5f5f5;
-    }
-    .dashboard-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 20px;
-    }
-    .metric-card {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      padding: 15px;
-    }
-    .metric-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .metric-title {
-      margin: 0;
-      font-size: 18px;
-      color: #333;
-    }
-    .chart-container {
-      position: relative;
-      height: 180px;
-      width: 100%;
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 30px;
-    }
-    .refresh-button {
-      display: block;
-      margin: 20px auto;
-      padding: 10px 20px;
-      background-color: #2196F3;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    .refresh-button:hover {
-      background-color: #0b7dda;
-    }
-    .info-card {
-      grid-column: span 2;
-      padding: 15px;
-      background-color: #e3f2fd;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .server-info {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-    .info-item {
-      text-align: center;
-      padding: 10px;
-    }
-    .info-value {
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
-    }
-    .info-label {
-      font-size: 14px;
-      color: #666;
-    }
-  </style>
+  <!-- Highcharts scripts -->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/series-label.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="dashboard-container">
@@ -126,41 +42,29 @@
       <div class="metric-card" id="cpuCard">
         <div class="metric-header">
           <h3 class="metric-title">CPU Usage (%)</h3>
-          <!-- Expand/Close buttons removed -->
         </div>
-        <div class="chart-container">
-          <canvas id="cpuChart"></canvas>
-        </div>
+        <div class="chart-container" id="cpuChart"></div>
       </div>
       
       <div class="metric-card" id="memoryCard">
         <div class="metric-header">
           <h3 class="metric-title">Memory Usage (%)</h3>
-          <!-- Expand/Close buttons removed -->
         </div>
-        <div class="chart-container">
-          <canvas id="memoryChart"></canvas>
-        </div>
+        <div class="chart-container" id="memoryChart"></div>
       </div>
       
       <div class="metric-card" id="diskCard">
         <div class="metric-header">
           <h3 class="metric-title">Disk Usage (%)</h3>
-          <!-- Expand/Close buttons removed -->
         </div>
-        <div class="chart-container">
-          <canvas id="diskChart"></canvas>
-        </div>
+        <div class="chart-container" id="diskChart"></div>
       </div>
       
       <div class="metric-card" id="combinedCard">
         <div class="metric-header">
           <h3 class="metric-title">Combined Metrics</h3>
-          <!-- Expand/Close buttons removed -->
         </div>
-        <div class="chart-container">
-          <canvas id="combinedChart"></canvas>
-        </div>
+        <div class="chart-container" id="combinedChart"></div>
       </div>
     </div>
     
@@ -168,7 +72,5 @@
   </div>
 
   <script src="script.js"></script>
-    
-  
 </body>
 </html>
