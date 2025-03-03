@@ -1,4 +1,21 @@
 let allData = null;
+
+const sources = []
+
+function handleSubmit(){
+  const  input = document.getElementById("ip-input").value;
+  console.log(input);
+  const ipv4Regex = /^\d+\.\d+\.\d+\.\d+$/;
+  if(ipv4Regex.test(input)){
+    addToListOfSources(input);
+  }else{
+    console.log("ipv4 format is wrong");
+  }
+}
+function addToListOfSources(val){
+    sources.push(val);
+    console.log(sources);
+}
 const commonChartOptions = {
   chart: {
     type: 'line',
@@ -124,7 +141,7 @@ function formatDate(date) {
 }
 
 function calculateAverages(data) {
-  console.log(data);
+  // console.log(data);
   
   if (!data || !data.cpu || data.cpu.length === 0 || data.memory.length === 0 || data.disk.length === 0){
     console.log("some error occured");
