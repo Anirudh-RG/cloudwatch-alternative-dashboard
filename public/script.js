@@ -6,15 +6,42 @@ function handleSubmit(){
   const  input = document.getElementById("ip-input").value;
   console.log(input);
   const ipv4Regex = /^\d+\.\d+\.\d+\.\d+$/;
-  if(ipv4Regex.test(input)){
+  if(ipv4Regex.test(input) && !sources.includes(input)){
     addToListOfSources(input);
   }else{
-    console.log("ipv4 format is wrong");
+    console.log("ipv4 format is wrong or already in the list");
   }
 }
 function addToListOfSources(val){
     sources.push(val);
-    console.log(sources);
+    // console.log(sources);
+    localStorage.setItem("sources", JSON.stringify(sources));
+    renderSourcesList();
+}
+
+function renderSourcesList(){
+  const sourcesList = document.getElementById("sources-list");
+  sourcesList.innerHTML = "";
+  sources.forEach(source => {
+    const li = document.createElement("li");
+    li.textContent = source;
+    sourcesList.appendChild(li);
+  });
+}
+
+
+
+function displaySources(){
+  return sources;
+}
+
+function handleLocalDelete(){
+  console.log("handleLocalDelete pressed");
+  localStorage.removeItem("sources");
+  sources.length = 0;
+  console.log("sources",sources);
+  console.log("local storage",localStorage.getItem("sources"));
+  renderSourcesList();
 }
 const commonChartOptions = {
   chart: {
@@ -239,10 +266,14 @@ function updateCharts(data) {
 }
 
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   initCharts();
   fetchData();
-  
-  // Auto-refresh every 5 minutes
+
+  const savedSources = localStorage.getItem("sources");
+  if(savedSources){
+    sources.push(...JSON.parse(savedSources));
+    renderSourcesList();
+  }
   setInterval(fetchData, 5 * 60 * 1000);
-});
+})
