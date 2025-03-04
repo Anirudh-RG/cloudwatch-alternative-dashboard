@@ -47,7 +47,7 @@ async function readMetricsFile(filePath) {
   const lines = [];
   for await (const line of rl) {
     lines.push(line);
-    if (lines.length > 100) lines.shift(); // Keep only the last 1000 lines
+    if (lines.length > 10) lines.shift(); // Keep only the last 1000 lines
   }
 
   for (const line of lines) {
