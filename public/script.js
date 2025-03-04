@@ -24,7 +24,7 @@ const commonChartOptions = {
       fontFamily: 'Arial, sans-serif'
     }
   },
-  time: {
+  time:{
     useUTC: false
   },
   title: {
@@ -40,9 +40,7 @@ const commonChartOptions = {
     type: 'datetime',
     tickPixelInterval: 150,
     labels: {
-      formatter: function() {
-        return Highcharts.dateFormat('%H:%M:%S', this.value);
-      }
+      format: '{value:%H:%M:%S}',
     }
   },
   yAxis: {
@@ -58,8 +56,14 @@ const commonChartOptions = {
   },
   tooltip: {
     formatter: function() {
+      const date = new Date(this.x);
       return '<b>' + this.series.name + '</b><br/>' +
-        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+        date.toLocaleString('en-IN', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true
+        }) + '<br/>' +
         Highcharts.numberFormat(this.y, 2) + '%';
     }
   },
@@ -189,8 +193,7 @@ function processDataForCharts(data) {
   const diskData = [];
   
   for (let i = 0; i < data.timestamps.length; i++) {
-    const timestamp = new Date(data.timestamps[i]).getTime();
-    
+    const timestamp = new Date(data.timestamps[i]).getTime(); // makes timestamps to local time.
     // Create data points for each metric
     cpuData.push([timestamp, data.cpu[i]]);
     memoryData.push([timestamp, data.memory[i]]);
